@@ -1,17 +1,13 @@
-import React,{useEffect, useState} from 'react'
+import React,{ useState } from 'react'
 import {connect} from 'react-redux'
-import { fetchData, getSensorsWithHistory } from '../../redux'
+import { getSensorsWithHistory } from '../../redux'
 
 import styles from './table.module.css'
 
-const Table = ({ fetchData, loading, sensors, error }) => {
+const Table = ({ loading, sensors, error }) => {
     const [page,setPage] = useState(1);
     const [numberOfRows,setNumberOfRows] = useState(30);
     const [searchText,setSearchText] = useState('');
-
-    useEffect(() => {
-        fetchData()
-    }, [ ])
 
 
     return loading ? (<div>loading</div>) : 
@@ -47,10 +43,6 @@ const mapStateToProps = state => {
         error: state.error
     }
 }
-const mapDispactchToProps = dispatch => {
-    return {
-        fetchData: () => dispatch(fetchData())
-    }
-}
 
-export default connect(mapStateToProps,mapDispactchToProps)(Table)
+
+export default connect(mapStateToProps)(Table)
