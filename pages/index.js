@@ -25,7 +25,7 @@ const Home = ({ fetchData, selectedSensor }) => {
 
       <Cards />
       <Map
-        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgcwYsdYTicHgR3lr3PqGJC0dV4TkuMlA&v=3.exp&libraries=geometry,drawing,places"
+        googleMapURL="https://maps.googleapis.com/maps/api/js?key=[GOOGLE_KEY_HERE]&v=3.exp&libraries=geometry,drawing,places"
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ height: `400px` }} />}
         mapElement={<div style={{ height: `100%` }} />}
