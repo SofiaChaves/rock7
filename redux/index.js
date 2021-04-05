@@ -1,5 +1,6 @@
 //Actions
-export * from './sensors/sensorsActions'
+export * from './data/dataActions'
+export * from './sensor/sensorActions'
 
 //selectors
-export * from './sensors/sensorsSelector'
+export * from './data/dataSelector'

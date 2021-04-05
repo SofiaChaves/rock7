@@ -1,4 +1,3 @@
-
 //util functions
 function sortDatesMaxToMin (a, b) {
     return b.getTime() - a.getTime()
@@ -23,17 +22,21 @@ function getSensorsHistoryBySensorId (data, id) {
 
 
 //selectors
-export function getSensorsWithHistory(state) {
+export function getSensorsWithHistory(data) {
     
-    const sensorsIds=getSensorsUniqueIds(state.data);
+    const sensorsIds=getSensorsUniqueIds(data);
 
     //getting [{ sensorId, history: [{ json entry }] }] being history sorted by date
     const sensors = sensorsIds.map((uniqueSensorId, index) => {
-        const sortedSensorUpdates = getSensorsHistoryBySensorId(state.data, uniqueSensorId)
+        const sortedSensorUpdates = getSensorsHistoryBySensorId(data, uniqueSensorId)
         return {
             sensorId: uniqueSensorId,
             history: sortedSensorUpdates
         }
     })
     return sensors    
+}
+
+export function getSensorBySensorId(sensorId, sensors) {
+    return sensors.filter(sensor => sensor.sensorId === sensorId)[0]
 }

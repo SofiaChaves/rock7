@@ -7,7 +7,7 @@ import Table from '../components/Table'
 import styles from '../styles/Home.module.css'
 import Cards from '../components/Cards'
 
-const Home = ({ fetchData }) => {
+const Home = ({ fetchData, selectedSensor }) => {
   
   useEffect(() => {
     fetchData()
@@ -18,19 +18,26 @@ const Home = ({ fetchData }) => {
       <Head>
         <title>Title</title>
         <link rel="icon" href="/favicon.ico" />
+        <link href="/font-awesome/css/fontawesome.min.css" rel="stylesheet"/>
+        <link href="/font-awesome/css/light.min.css" rel="stylesheet"/>
       </Head>
 
       <Cards />
-      <Table />
+      { selectedSensor.sensorId ? <Table /> : null }
       
     </div>
   )
 }
 
+const mapStateToProps = state => {
+  return {
+      selectedSensor: state.selectedSensor,
+  }
+}
 const mapDispactchToProps = dispatch => {
   return {
       fetchData: () => dispatch(fetchData())
   }
 }
 
-export default connect(null,mapDispactchToProps)(Home)
+export default connect(mapStateToProps,mapDispactchToProps)(Home)

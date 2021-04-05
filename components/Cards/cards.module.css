@@ -1,6 +1,7 @@
 .cards{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));;
     column-gap: 2.5em;
     row-gap: 2.5em;
+    margin: 0 0 3em;
 }

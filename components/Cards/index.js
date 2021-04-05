@@ -24,9 +24,9 @@ const Cards = ({ loading, sensors, error }) => {
 
 const mapStateToProps = state => {
     return {
-        loading: state.loading,
-        sensors: state.data != [] ? getSensorsWithHistory(state) : state.data,
-        error: state.error
+        loading: state.sensors.loading,
+        sensors: state.sensors.data,
+        error: state.sensors.error
     }
 }
 

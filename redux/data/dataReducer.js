@@ -2,7 +2,8 @@ import {
     FETCH_DATA_REQUEST, 
     FETCH_DATA_SUCCESS, 
     FETCH_DATA_FAILURE,
-    } from './sensorsTypes';
+    SELECT_SENSOR
+    } from './dataTypes';
 
 const initialState = {
     loading: true,

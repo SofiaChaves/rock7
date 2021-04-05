@@ -2,18 +2,18 @@ import {
     FETCH_DATA_REQUEST, 
     FETCH_DATA_SUCCESS, 
     FETCH_DATA_FAILURE,
-    } from './sensorsTypes';
-
+    SELECT_SENSOR
+    } from './dataTypes';
+import { getSensorsWithHistory } from './dataSelector'
 import axios from 'axios'
-import { cloneElement } from 'react';
 
-export const fetchDataRequest = () => {
+const fetchDataRequest = () => {
     return {
         type: FETCH_DATA_REQUEST,
     }
 }
 
-export const fetchDataSuccess = data => {
+const fetchDataSuccess = data => {
     return {
         type: FETCH_DATA_SUCCESS,
         payload: data
@@ -21,7 +21,7 @@ export const fetchDataSuccess = data => {
 }
 
 
-export const fetchDataFailure = error => {
+const fetchDataFailure = error => {
     return {
         type: FETCH_DATA_FAILURE,
         payload: error
@@ -39,7 +39,7 @@ export const fetchData = () => {
                         ...item,
                         payload: JSON.parse(atob(item.payload))
                     })
-                dispatch(fetchDataSuccess(decodedData))                
+                dispatch(fetchDataSuccess(getSensorsWithHistory(decodedData)))                
             })
             .catch(error =>{
                 dispatch(fetchDataFailure(error.message))

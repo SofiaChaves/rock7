@@ -1,0 +1,1 @@
+export const SELECT_SENSOR = 'SELECT_SENSOR'

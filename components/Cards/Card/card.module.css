@@ -4,20 +4,47 @@
     align-items: stretch;
     border-radius: 20px;
     border: 1px solid rgba(0,0,0,.1);
+    cursor: pointer;
+}
+.card.selected{
+    color: white;
+    background-color: #747AFF;
+    border-color: transparent;
 }
 .header{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 50%;
-    padding: 1.5em;
+    padding: 1.5em 2em;
     border-bottom: 1px solid rgba(0,0,0,.1)
+}
+.header img {
+    width: 40%;
+    margin: 3.5em 0;
+}
+.header .battery{
+    align-self: flex-end;
+    display: flex;
+    align-items: flex-start;
+}
+.header .battery i{
+    font-size: 1.3em;
+    margin-right: 0.3em;
 }
 
 .body{
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    height: 50%;
-    padding: 1.5em;
+    align-items: center;
+    row-gap: 2em;
+    column-gap: 1em;
+    padding: 2.5em;
+    font-size: 0.85em;
+}
+
+.body i {
+    font-size: 1.6em;
+    margin-right: 0.5em;
 }

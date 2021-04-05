@@ -2,11 +2,11 @@ import { createStore, applyMiddleware } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import thunkMiddleware from 'redux-thunk'
 
-import sensorsReducer from './sensors/sensorsReducer'
+import rootReducer from './rootReducer'
 
 const store = createStore(
-    sensorsReducer, 
+    rootReducer, 
     composeWithDevTools(applyMiddleware(thunkMiddleware))
 )
 
-export default store;
+export default store

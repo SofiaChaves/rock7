@@ -1,0 +1,15 @@
+.controllersWrapper > *{
+    display: inline-block;
+    margin: 0 2em;
+    user-select: none;
+}
+.controllersWrapper > span{
+    cursor: pointer;
+}
+.disabled{
+    opacity: 0.5;
+    cursor: not-allowed !important;
+}
+.controllersWrapper i {
+    margin: 0 0.7em;
+}

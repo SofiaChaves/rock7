@@ -1,46 +1,60 @@
-import React,{ useState } from 'react'
+import React,{ useEffect, useState } from 'react'
 import {connect} from 'react-redux'
-import { getSensorsWithHistory } from '../../redux'
+import { getSensorBySensorId } from '../../redux'
 
 import styles from './table.module.css'
+import PageControllers from './PageControllers'
 
-const Table = ({ loading, sensors, error }) => {
-    const [page,setPage] = useState(1);
-    const [numberOfRows,setNumberOfRows] = useState(30);
-    const [searchText,setSearchText] = useState('');
+const Table = ({ sensor }) => {
+    const [page,setPage] = useState(1)
+    const numberOfRows = 10;
 
+    useEffect(()=>{
+        setPage(1)
+    },[sensor])
 
-    return loading ? (<div>loading</div>) : 
-        error ? (<div>{error}</div>) : 
-        (
-            <div>
-                <input type='text' value={searchText} onChange={(e)=> {setSearchText(e.target.value)}}></input>
+    return (
+        <div>
+            <h1>History of selected Sensor</h1>
+            <div className={styles.tableWrapper}>
                 <table className={styles.table}>
                     <tbody>
-                        {sensors.filter((sensor) => sensor.sensorId.includes(searchText)).slice(numberOfRows*(page-1), numberOfRows*page)?.map(sensor =>
-                        <tr key={sensor.id}>
-                            <td>{sensor.id}</td>
-                            <td>{sensor.longitude}</td>
-                            <td>{sensor.latitude}</td>
-                            <td>{sensor.sensorId}</td>
-                            <td>{sensor.bytes}</td>
+                        <tr className={styles.headerTr}>
+                            <th>Date</th>
+                            <th>Temperature</th>
+                            <th>Oxygen</th>
+                            <th>Speed</th>
+                            <th>State</th>
+                            <th>Height</th>
+                            <th>Alarm</th>
                         </tr>
-                    )}
+                        {sensor.history?.slice(numberOfRows*(page-1), numberOfRows*page)?.map(entry =>
+                            <tr key={entry.id}>
+                                <td>{new Date(entry.transmittedAt.iso).toDateString()}</td>
+                                <td>{entry.payload.temperature.value}{entry.payload.temperature.unit}</td>
+                                <td>{entry.payload.oxygen.value}{entry.payload.oxygen.unit}</td>
+                                <td>{entry.payload.speed.value}{entry.payload.speed.unit}</td>
+                                <td>{entry.payload.state}</td>
+                                <td>{entry.payload.height.value}{entry.payload.height.unit}</td>
+                                <td>{entry.payload.alarm ? 'ON' : 'OFF'}</td>
+                            </tr>
+                        )}
+                        <tr className={styles.footerTr}>
+                            <td colSpan='7'>
+                                <PageControllers page={page} setPage={setPage} numberOfRows={10} max={Math.ceil(sensor.history.length/numberOfRows)}/>
+                            </td>
+                        </tr>
                     </tbody>                
                 </table>
-                <button onClick={() => setPage(page == 1 ? page : page - 1)}>PREV</button>
-                <button onClick={() => setPage((sensors.length/numberOfRows) <= page ? page : page + 1)}>NEXT</button>
-            </div>
-            
-            
-        )
+            </div>      
+        </div>     
+        
+    )
 }
 
 const mapStateToProps = state => {
     return {
-        loading: state.loading,
-        sensors: state.data != [] ? getSensorsWithHistory(state) : state.data,
-        error: state.error
+        sensor: getSensorBySensorId(state.selectedSensor.sensorId, state.sensors.data),
     }
 }
 
