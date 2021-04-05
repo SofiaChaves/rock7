@@ -6,6 +6,7 @@ import Head from 'next/head'
 import Table from '../components/Table'
 import styles from '../styles/Home.module.css'
 import Cards from '../components/Cards'
+import Map from '../components/Map'
 
 const Home = ({ fetchData, selectedSensor }) => {
   
@@ -23,6 +24,12 @@ const Home = ({ fetchData, selectedSensor }) => {
       </Head>
 
       <Cards />
+      <Map
+        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgcwYsdYTicHgR3lr3PqGJC0dV4TkuMlA&v=3.exp&libraries=geometry,drawing,places"
+        loadingElement={<div style={{ height: `100%` }} />}
+        containerElement={<div style={{ height: `400px` }} />}
+        mapElement={<div style={{ height: `100%` }} />}
+      />
       { selectedSensor.sensorId ? <Table /> : null }
       
     </div>
