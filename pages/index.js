@@ -1,12 +1,12 @@
 import React,{ useEffect } from 'react'
 import {connect} from 'react-redux'
-import { fetchData, getSensorsWithHistory } from '../redux'
+import { fetchData } from '../redux'
 
-import Head from 'next/head'
-import Table from '../components/Table'
 import styles from '../styles/Home.module.css'
+import Table from '../components/Table'
 import Cards from '../components/Cards'
 import Map from '../components/Map'
+import Meta from '../meta'
 
 const Home = ({ fetchData, selectedSensor }) => {
   
@@ -16,20 +16,11 @@ const Home = ({ fetchData, selectedSensor }) => {
 
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Title</title>
-        <link rel="icon" href="/favicon.ico" />
-        <link href="/font-awesome/css/fontawesome.min.css" rel="stylesheet"/>
-        <link href="/font-awesome/css/light.min.css" rel="stylesheet"/>
-      </Head>
+      <Meta />
 
       <Cards />
-      <Map
-        googleMapURL="https://maps.googleapis.com/maps/api/js?key=[GOOGLE_KEY_HERE]&v=3.exp&libraries=geometry,drawing,places"
-        loadingElement={<div style={{ height: `100%` }} />}
-        containerElement={<div style={{ height: `400px` }} />}
-        mapElement={<div style={{ height: `100%` }} />}
-      />
+      <Map />
+      <hr/>
       { selectedSensor.sensorId ? <Table /> : null }
       
     </div>
